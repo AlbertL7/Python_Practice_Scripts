@@ -18,7 +18,7 @@ system = platform.system()
 if system == 'Windows':
     ping = 'ping -n 1 '
 else:
-    pring = "ping -c 1 "
+    ping = "ping -c 1 "
 
 time1 = datetime.datetime.now()
 if system == 'Windows':
