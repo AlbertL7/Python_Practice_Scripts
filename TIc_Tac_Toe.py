@@ -55,6 +55,8 @@ def clear_screen():
     
 def ttt_game(): 
     count = 0
+
+    turn_Player1 = True
     
     while count in range(0,9):
          
@@ -62,83 +64,68 @@ def ttt_game():
         board_setup(board)    
         move = input('\nSelect a Position (1-9): ')
         
-        while move not in ['1','2','3','4','5','6','7','8','9']:
+        if move not in ['1','2','3','4','5','6','7','8','9']:
             move = input('Please select a valid position (1-9): ')
+
+        if board[move] != ' ':
+            print('Really... That move is already taken, choose another one!!')
+            continue
                             
-        if board[move] == ' ':
+        if turn_Player1:
             board[move] = player1
-            count += 1
-            
-        if count % 2 == 0:
+        else:
             board[move] = player2
+            
+        count += 1
+
+        turn_Player1 = not turn_Player1
                
         if count >=5:
-            if board['1'] == board['2'] == board['3'] == player1:
+            if board['7'] == board['8'] == board['9'] != ' ':
+                winner = player1 if board['7'] == player1 else player2
                 print(board_setup(board))
-                print(colored('Player 1 wins!', 'red'))
-                break
-            elif board['1'] == board['2'] == board['3'] == player2:
+                print(colored(f'Player {"1" if winner == player1 else "2"} wins!', 'red' if winner == player1 else 'blue'))
+                return
+            elif board['4'] == board['5'] == board['6'] != ' ':
+                winner = player1 if board['4'] == player1 else player2
                 print(board_setup(board))
-                print(colored('Player 2 wins!', 'blue'))
-                break
-            elif board['4'] == board['5'] == board['6'] == player1:
+                print(colored(f'Player {"1" if winner == player1 else "2"} wins!', 'red' if winner == player1 else 'blue'))
+                return
+            elif board['1'] == board['2'] == board['3'] != ' ':
+                winner = player1 if board['1'] == player1 else player2
                 print(board_setup(board))
-                print(colored('Player 1 wins!', 'red'))
-                break
-            elif board['4'] == board['5'] == board['6'] == player2:
+                print(colored(f'Player {"1" if winner == player1 else "2"} wins!', 'red' if winner == player1 else 'blue'))
+                return
+            elif board['1'] == board['5'] == board['9'] != ' ':
+                winner = player1 if board['1'] == player1 else player2
                 print(board_setup(board))
-                print(colored('Player 2 wins!', 'blue'))
-                break
-            elif board['7'] == board['8'] == board['9'] == player1:
+                print(colored(f'Player {"1" if winner == player1 else "2"} wins!', 'red' if winner == player1 else 'blue'))
+                return
+            elif board['7'] == board['5'] == board['3'] != ' ':
+                winner = player1 if board['7'] == player1 else player2
                 print(board_setup(board))
-                print(colored('Player 1 wins!', 'red'))
-                break
-            elif board['7'] == board['8'] == board['9'] == player2:
+                print(colored(f'Player {"1" if winner == player1 else "2"} wins!', 'red' if winner == player1 else 'blue'))
+                return
+            elif board['7'] == board['4'] == board['1'] != ' ':
+                winner = player1 if board['7'] == player1 else player2
                 print(board_setup(board))
-                print(colored('Player 2 wins!', 'blue'))
-                break
-            elif board['1'] == board['5'] == board['9'] == player1:
+                print(colored(f'Player {"1" if winner == player1 else "2"} wins!', 'red' if winner == player1 else 'blue'))
+                return
+            elif board['8'] == board['5'] == board['2'] != ' ':
+                winner = player1 if board['8'] == player1 else player2
                 print(board_setup(board))
-                print(colored('Player 1 wins!', 'red'))
-                break
-            elif board['1'] == board['5'] == board['9'] == player2:
+                print(colored(f'Player {"1" if winner == player1 else "2"} wins!', 'red' if winner == player1 else 'blue'))
+                return
+            elif board['9'] == board['6'] == board['3'] != ' ':
+                winner = player1 if board['9'] == player1 else player2
                 print(board_setup(board))
-                print(colored('Player 2 wins!', 'blue'))
-                break
-            elif board['7'] == board['5'] == board['3'] == player1:
-                print(board_setup(board))
-                print(colored('Player 1 wins!', 'red'))
-                break
-            elif board['7'] == board['5'] == board['3'] == player2:
-                print(board_setup(board))
-                print(colored('Player 2 wins!', 'blue'))
-                break 
-            elif board['7'] == board['4'] == board['1'] == player1:
-                print(board_setup(board))
-                print(colored('Player 1 wins!', 'red'))
-                break     
-            elif board['7'] == board['4'] == board['1'] == player2:
-                print(board_setup(board))
-                print(colored('Player 2 wins!', 'blue'))
-                break
-            elif board['8'] == board['5'] == board['2'] == player1:
-                print(board_setup(board))
-                print(colored('Player 1 wins!', 'red'))
-                break 
-            elif board['8'] == board['5'] == board['2'] == player2:
-                print(board_setup(board))
-                print(colored('Player 2 wins!', 'blue'))
-                break
-            elif board['9'] == board['6'] == board['3'] == player1:
-                print(board_setup(board))
-                print(colored('Player 1 wins!', 'red'))
-                break 
-            elif board['9'] == board['6'] == board['3'] == player2:
-                print(board_setup(board))
-                print(colored('Player 2 wins!', 'blue'))
-                break
-                         
-                        
+                print(colored(f'Player {"1" if winner == player1 else "2"} wins!', 'red' if winner == player1 else 'blue'))
+                return
+
+    if count == 9:
+        print("It's a tie!")
+        return
+                                  
 play_game = True
 
 while play_game:
